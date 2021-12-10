@@ -9,20 +9,26 @@
     "lint": "eslint '**/*.{js,jsx,ts,tsx}'"
   },
   "dependencies": {
-    "@pankod/refine": "^2.0.7",
-    "@pankod/refine-nextjs-router": "^2.3.1",
-    "next": "12.0.7",
-    "next-compose-plugins": "^2.2.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "@pankod/refine-strapi": "^2.0.7",
+    "@pankod/refine": "^2.4.2",
+    "@pankod/refine-nextjs-router": "^2.4.2",
+    "@pankod/refine-strapi": "^2.4.2",
     "axios": "^0.21.1",
-    "nookies": "^2.5.2"
+    "constate": "^3.3.0",
+    "next": "^12.0.3",
+    "next-compose-plugins": "^2.2.1",
+    "next-optimized-images": "^3.0.0-canary.10",
+    "nookies": "^2.5.2",
+    "react": "^17.0.2",
+    "react-burger-menu": "^3.0.6",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.3.3",
+    "styled-normalize": "^8.0.7"
   },
   "devDependencies": {
     "@types/node": "^14.14.13",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/styled-components": "^5.1.17",
     "@typescript-eslint/parser": "^4.9.1",
     "typescript": "^4.1.3"
   }
