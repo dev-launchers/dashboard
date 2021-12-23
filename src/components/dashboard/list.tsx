@@ -14,27 +14,31 @@ import {
     // Select,
     useSelect,
     DeleteButton,
-} from "@pankod/refine";
+    GetListResponse,
+    } from "@pankod/refine";
 
-import { IProject, ICategory } from "../interfaces";
+import { IProject, ICategory } from "./interfaces";
 
-export const PostList: React.FC<IResourceComponentsProps> = () => {
-    const { tableProps } = useTable<IProject>();
-    console.log(tableProps);
+
+export const ProjectList: React.FC<IResourceComponentsProps<GetListResponse<IProject>>> = 
+({ initialData }) => {
     
-    const categoryIds =
-        tableProps?.dataSource?.map((item) => item?.id) ?? [];
-    const { data: categoriesData, isLoading } = useMany<ICategory>({
-        resource: "projects",
-        ids: categoryIds,
-        queryOptions: {
-            enabled: categoryIds.length > 0,
-        },
-    });
+    const { tableProps } = useTable<IProject>({resource: "projects",queryOptions: {initialData,},});
+     
+    
+    // const categoryIds =
+    //     tableProps?.dataSource?.map((item) => item?.id) ?? [];
+    // const { data: categoriesData, isLoading } = useMany<ICategory>({
+    //     resource: "projects",
+    //     ids: categoryIds,
+    //     queryOptions: {
+    //         enabled: categoryIds.length > 0,
+    //     },
+    // });
 
-    const { selectProps: categorySelectProps } = useSelect<ICategory>({
-        resource: `projects`,
-    });
+    // const { selectProps: categorySelectProps } = useSelect<ICategory>({
+    //     resource: `projects`,
+    // });
 
     return (
         <List>
@@ -84,8 +88,8 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
                     title="Actions"
                     dataIndex="actions"
                     render={(_, record) => {
-                        console.log(record);
-                        
+                        // console.log(record);
+                       
                         return (
                             <Space>
                                 <EditButton
@@ -112,4 +116,4 @@ export const PostList: React.FC<IResourceComponentsProps> = () => {
             </Table>
         </List>
     );
-};
+ };

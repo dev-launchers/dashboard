@@ -1,21 +1,21 @@
 import React from "react";
 import { AppProps } from "next/app";
 import Script from "next/script";
-
 import { Refine } from "@pankod/refine";
 import routerProvider from "@pankod/refine-nextjs-router";
-
 import "@pankod/refine/dist/styles.min.css";
-import { DataProvider } from "@pankod/refine-strapi";
-import { API_URL } from "src/constants";
+import { DataProvider } from "src/dataProvider";
+// import { DataProvider } from "@pankod/refine-strapi";
 import GlobalStyle from "../styles/globals";
 import { ThemeProvider } from "styled-components";
 import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import theme from "../styles/theme";
 import { UserDataProvider } from "src/context/UserDataContext";
-import { PostList } from "@components/dashboard/list";
+import {ProjectList} from "@components/dashboard/list";
 import { env } from "src/utils/EnvironmentVariables";
+
+const CustomDashboardPage = () => <div> Custom Dashboard Page </div>;
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const dataProvider = DataProvider(env().STRAPI_URL);
@@ -23,7 +23,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <Refine
       routerProvider={routerProvider}
       dataProvider={dataProvider}
-      resources={[{ name: "projects", list: PostList }]}
+      resources={[{ name: "projects", list: ProjectList }]}
+      DashboardPage={CustomDashboardPage}
       warnWhenUnsavedChanges={true}
     >
        <ThemeProvider theme={theme}>
@@ -41,11 +42,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
               gtag('config', 'AW-599284852');
             `}
           </Script>
-          <UserDataProvider>
+          <UserDataProvider> 
           <Header />
           <Component {...pageProps} />
           <Footer />
-          </UserDataProvider>
+          </UserDataProvider> 
       </ThemeProvider>
     </Refine>
   );
