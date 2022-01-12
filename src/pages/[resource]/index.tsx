@@ -1,7 +1,6 @@
 import { GetServerSideProps } from "next";
 export { NextRouteComponent as default } from "@pankod/refine-nextjs-router";
-import { DataProvider } from "src/dataProvider";
-// import { DataProvider } from "@pankod/refine-strapi";
+ import { DataProvider } from "@pankod/refine-strapi";
 import axios from "axios";
 import nookies from "nookies";
 import {TOKEN_KEY } from "src/constants";

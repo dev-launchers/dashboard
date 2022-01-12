@@ -4,8 +4,8 @@ import Script from "next/script";
 import { Refine } from "@pankod/refine";
 import routerProvider from "@pankod/refine-nextjs-router";
 import "@pankod/refine/dist/styles.min.css";
-import { DataProvider } from "src/dataProvider";
-// import { DataProvider } from "@pankod/refine-strapi";
+import axios from "axios";
+import { DataProvider } from "@pankod/refine-strapi";
 import GlobalStyle from "../styles/globals";
 import { ThemeProvider } from "styled-components";
 import Header from "../components/common/Header";
@@ -16,9 +16,11 @@ import {ProjectList} from "@components/dashboard/list";
 import { env } from "src/utils/EnvironmentVariables";
 
 const CustomDashboardPage = () => <div> Custom Dashboard Page </div>;
+const axiosInstance = axios.create();
+axiosInstance.defaults.withCredentials = true;
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
-  const dataProvider = DataProvider(env().STRAPI_URL);
+  const dataProvider = DataProvider(env().STRAPI_URL,axiosInstance);
   return (
     <Refine
       routerProvider={routerProvider}
