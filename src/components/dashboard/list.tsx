@@ -21,7 +21,7 @@ import { IProject, ICategory } from "./interfaces";
 
 
 export const ProjectList: React.FC<IResourceComponentsProps<GetListResponse<IProject>>> = 
-({ initialData }) => {
+({ initialData, isAuthenticated }) => {
     
     const { tableProps } = useTable<IProject>({resource: "projects",queryOptions: {initialData,},});
      
@@ -39,7 +39,10 @@ export const ProjectList: React.FC<IResourceComponentsProps<GetListResponse<IPro
     // const { selectProps: categorySelectProps } = useSelect<ICategory>({
     //     resource: `projects`,
     // });
-
+    console.log(isAuthenticated);
+    if(!isAuthenticated) {
+        return "please sign in"
+    }
     return (
         <List>
             <Table {...tableProps} rowKey="slug">
