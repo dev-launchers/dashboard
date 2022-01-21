@@ -16,6 +16,8 @@ import theme from "../styles/theme";
 import { UserDataProvider } from "src/context/UserDataContext";
 import { PostList } from "@components/dashboard/list";
 import { env } from "src/utils/EnvironmentVariables";
+import { EditProject } from '@components/dashboard/EditProject';
+import { ShowProject } from '@components/dashboard/ShowProject';
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const dataProvider = DataProvider(env().STRAPI_URL);
@@ -23,29 +25,29 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <Refine
       routerProvider={routerProvider}
       dataProvider={dataProvider}
-      resources={[{ name: "projects", list: PostList }]}
+      resources={[{ name: "projects", list: PostList, edit: EditProject, show: ShowProject }]}
       warnWhenUnsavedChanges={true}
     >
-       <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
-          <Script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=AW-599284852"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-599284852"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){window.dataLayer.push(arguments);}
               gtag('js', new Date());
 
               gtag('config', 'AW-599284852');
             `}
-          </Script>
-          <UserDataProvider>
+        </Script>
+        <UserDataProvider>
           <Header />
           <Component {...pageProps} />
           <Footer />
-          </UserDataProvider>
+        </UserDataProvider>
       </ThemeProvider>
     </Refine>
   );
