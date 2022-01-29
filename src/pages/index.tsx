@@ -1,20 +1,17 @@
 import { GetServerSideProps } from "next";
 export { NextRouteComponent as default } from "@pankod/refine-nextjs-router";
-import { checkAuthentication } from "@pankod/refine-nextjs-router";
-
-import { API_URL } from "src/constants";
-import strapiAuthProvider from "src/authProvider";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { authProvider } = strapiAuthProvider(API_URL);
-  const { isAuthenticated, ...props } = await checkAuthentication(
-    authProvider,
-    context
-  );
 
-  if (isAuthenticated) {
-    return props;
-  }
+  const {req} = context;
+
+  const isAuthenticated = !!req.cookies.token;
+
+if (!isAuthenticated) {
+  // TODO: unauthenticated users get redirected to the signing up page!
+ return ({props: {}});
+}
+
 
   return {
     props: {},
