@@ -6,6 +6,7 @@ import {
     Form,
     Input,
     useForm,
+    ImageField,
 } from "@pankod/refine";
 
 const formInputs = [
@@ -14,7 +15,16 @@ const formInputs = [
     { label: "Title", name: "title", required: true },
     { label: "Description", title: "description", required: true },
     { label: "SignupFormUrl", title: "signupFormUrl", required: false },
-    { label: "IsListed", title: "isListed", required: false },
+    { label: "Is Listed", title: "isListed", required: false },
+    { label: "Parent Project", title: "parentProject", required: false },
+    { label: "Google Meet", title: "google_meet", required: false },
+    { label: "Open Positions", title: "openPositions", required: false },
+    { label: "Team Leaders", title: "team.leaders", required: false },
+    { label: "Team Members", title: "team.members", required: false },
+    { label: "Board", title: "board", required: false },
+    { label: "Interests", title: "interests", required: false },
+    { label: "Sub-projects", title: "subProjects", required: false },
+
 ];
 
 export const EditProject: React.FC = () => {
@@ -41,7 +51,7 @@ export const EditProject: React.FC = () => {
                     )
                 })}
 
-                <Form.Item label="Image">
+                <Form.Item label="Hero Image">
                     <Form.Item
                         name="image"
                         valuePropName="fileList"
@@ -49,15 +59,17 @@ export const EditProject: React.FC = () => {
                         noStyle
                     >
                         <Upload.Dragger
-                            name="file"
+                            name="heroImage"
                             action={`${apiUrl}/media/upload`}
                             listType="picture"
                             maxCount={5}
                             multiple
                         >
-                            <p className="ant-upload-text">
-                                Drag & drop a file in this area
-                            </p>
+                            <ImageField
+                                value=""
+                                title=""
+                                width={200}
+                            />
                         </Upload.Dragger>
                     </Form.Item>
                 </Form.Item>
