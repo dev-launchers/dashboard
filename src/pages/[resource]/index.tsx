@@ -16,7 +16,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   
   if (!isAuthenticated) {
      // TODO: unauthenticated users get redirected to the signing up page!
-    return ({props: {}});
+    return (
+      {props: {
+        isAuthenticated
+      }});
   }
 
   const { query } = context;
@@ -34,10 +37,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {
         initialData: data,
+        isAuthenticated
       },
     };
   } catch (error) {
     console.log(error)
-    return { props: {} };
+    return { props: {
+      isAuthenticated
+    } };
   }
 };
