@@ -12,8 +12,10 @@ import Header from "../components/common/Header";
 import Footer from "../components/common/Footer";
 import theme from "../styles/theme";
 import { UserDataProvider } from "src/context/UserDataContext";
-import {ProjectList} from "@components/dashboard/list";
+import { ProjectList } from "@components/dashboard/list";
 import { env } from "src/utils/EnvironmentVariables";
+import { EditProject } from '@components/dashboard/EditProject';
+import { ShowProject } from '@components/dashboard/ShowProject';
 
 const CustomDashboardPage = () => <div> Custom Dashboard Page </div>;
 const axiosInstance = axios.create();
@@ -25,31 +27,31 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <Refine
       routerProvider={routerProvider}
       dataProvider={dataProvider}
-      resources={[{ name: "projects", list: ProjectList }]}
+      resources={[{ name: "projects", list: ProjectList, edit: EditProject, /* show: ShowProject */ }]}
       DashboardPage={CustomDashboardPage}
       warnWhenUnsavedChanges={true}
     >
-       <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <GlobalStyle />
-          <Script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=AW-599284852"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-599284852"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){window.dataLayer.push(arguments);}
               gtag('js', new Date());
 
               gtag('config', 'AW-599284852');
             `}
-          </Script>
-          <UserDataProvider> 
+        </Script>
+        <UserDataProvider>
           <Header />
           <Component {...pageProps} />
           <Footer />
-          </UserDataProvider> 
-      </ThemeProvider>
+        </UserDataProvider>
+        </ThemeProvider>
     </Refine>
   );
 }
