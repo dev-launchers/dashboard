@@ -99,11 +99,11 @@ export const ProjectList: React.FC<IResourceComponentsProps<GetListResponse<IPro
                                     resource="projects"
                                     resourceName={record.id}
                                 />
-                                <ShowButton
+                                {/* <ShowButton
                                     hideText
                                     size="small"
                                     recordItemId={record.id}
-                                />
+                                /> */}
                                 <DeleteButton
                                     hideText
                                     size="small"
